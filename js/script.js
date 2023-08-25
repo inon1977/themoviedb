@@ -6,6 +6,37 @@ const apiUrl = 'https://api.themoviedb.org/3/movie/popular';
         .then(data => {
             const movieList = document.getElementById('movieList');
             data.results.forEach(movie => {
+                const genreIds = [28, 12, 16, 35, 80, 99, 18, 10751, 14, 36, 27, 10402, 9648, 10749, 878, 10770, 53, 10752, 37];
+                const genres = {
+                28: "Action",
+                12: "Adventure",
+                16: "Animation",
+                35: "Comedy",
+                80: "Crime",
+                99: "Documentary",
+                18: "Drama",
+                10751: "Family",
+                14: "Fantasy",
+                36: "History",
+                27: "Horror",
+                10402: "Music",
+                9648: "Mystery",
+                10749: "Romance",
+                878: "Science Fiction",
+                10770: "TV Movie",
+                53: "Thriller",
+                10752: "War",
+                37: "Western"
+                };
+                let movie_Genr = '';
+                let movieGenre = movie.genre_ids;
+                movieGenre.forEach(genreId => {
+                    movie_Genr += `${genres[genreId]},`;
+                    console.log(movie_Genr);
+                    console.log(movie.title + ': ' +genres[genreId]);
+                });
+                
+                //console.log(movieGenre);
                 const movieId = movie.id;
                 const creditsUrl = `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${apiKey}`;
                 //fetching cast:
@@ -26,17 +57,16 @@ const apiUrl = 'https://api.themoviedb.org/3/movie/popular';
                                 itemsAdded++;
                             }
                         })
-                        console.log('movie: ', movie.title);
-                        console.log('Cast:', cast);
                     })
                     .catch(error => {console.error('Error:', error);});
                 //declare / create elements: 
                 const castContainer = document.createElement("div");
                 const castList = document.createElement("ul");
+                const castListTitle = document.createElement("h3");
+                castListTitle.textContent = "Cast:"
                 castList.className = "list-group";
                 castList.setAttribute('id', 'castList');
                 castList.textContent = cast;
-                //castContainer.textContent = cast;
                 const movieID = movie.id;
                 const wrapperdiv = document.createElement('div');
                 const overlaydiv = document.createElement('div');
@@ -147,9 +177,11 @@ const apiUrl = 'https://api.themoviedb.org/3/movie/popular';
                                 modalBody.appendChild(modalGridRow);
                                         modalGridRow.appendChild(modalGridCol4);
                                             modalGridCol4.appendChild(modalMoviePoster);
+                                            modalGridCol4.innerHTML += movie_Genr;
                                             modalGridRow.appendChild(modalGridCol8);
                                                 modalGridCol8.appendChild(modalBodyText);
                                                 modalGridCol8.appendChild(castContainer);
+                                                    castContainer.appendChild(castListTitle);    
                                                     castContainer.appendChild(castList);
                                 modalBody.appendChild(modalFooter);
                         
@@ -159,7 +191,3 @@ const apiUrl = 'https://api.themoviedb.org/3/movie/popular';
       .catch(error => {
         console.error('Error:', error);
       });
-    //   const movieOverview = document.getElementsByClassName("card-text");
-    //   function show_overview(){}
-    //   console.log(movieOverview);
-
