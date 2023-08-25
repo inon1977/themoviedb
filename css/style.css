@@ -52,3 +52,6 @@
     position: relative;
     z-index: 1;
 }
+.badge {
+    font-weight: normal;
+}

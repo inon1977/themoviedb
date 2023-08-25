@@ -10,8 +10,6 @@ const apiUrl = 'https://api.themoviedb.org/3/movie/popular';
                 const creditsUrl = `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${apiKey}`;
                 //fetching cast:
                 let cast = '';
-                let castListUL = '';
-                let castListItem = '';
                 fetch(creditsUrl)
                     .then(response => response.json())
                     .then(data => {
@@ -22,23 +20,22 @@ const apiUrl = 'https://api.themoviedb.org/3/movie/popular';
                         cast.forEach(castMember => {
                             if(itemsAdded < maxItems) {
                                 const castListItem = document.createElement("li");
-                                castListItem.textContent = `${castMember.name} as ${castMember.character}`;
+                                castListItem.className = "list-group-item";
+                                castListItem.innerHTML = `<span class="badge text-bg-dark">${castMember.name}</span><small> as </small> <span class="badge text-bg-warning">${castMember.character}</span>`;
                                 castList.appendChild(castListItem);
                                 itemsAdded++;
-                            } else {
-                                console.log('end of cast list');
                             }
                         })
                         console.log('movie: ', movie.title);
                         console.log('Cast:', cast);
                     })
-                    .catch(error => {
-                        console.error('Error:', error);
-                    });
+                    .catch(error => {console.error('Error:', error);});
                 //declare / create elements: 
                 const castContainer = document.createElement("div");
                 const castList = document.createElement("ul");
+                castList.className = "list-group";
                 castList.setAttribute('id', 'castList');
+                castList.textContent = cast;
                 //castContainer.textContent = cast;
                 const movieID = movie.id;
                 const wrapperdiv = document.createElement('div');
@@ -98,8 +95,6 @@ const apiUrl = 'https://api.themoviedb.org/3/movie/popular';
                         const openModal = document.getElementById(`id-${movieID}`);
                         if (openModal) {
                             openModal.style.display = 'none';
-                        } else {
-                            console.log('what do you want?')
                         }
                     }
                 })
@@ -155,7 +150,7 @@ const apiUrl = 'https://api.themoviedb.org/3/movie/popular';
                                             modalGridRow.appendChild(modalGridCol8);
                                                 modalGridCol8.appendChild(modalBodyText);
                                                 modalGridCol8.appendChild(castContainer);
-                                                    //castContainer.appendChild(castList);
+                                                    castContainer.appendChild(castList);
                                 modalBody.appendChild(modalFooter);
                         
             
