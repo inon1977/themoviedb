@@ -5,6 +5,7 @@ const apiUrl = 'https://api.themoviedb.org/3/movie/popular';
         .then(response => response.json())
         .then(data => {
             const movieList = document.getElementById('movieList');
+            //getting movie genre and store it in 'movie_Genr' variable.
             data.results.forEach(movie => {
                 const genreIds = [28, 12, 16, 35, 80, 99, 18, 10751, 14, 36, 27, 10402, 9648, 10749, 878, 10770, 53, 10752, 37];
                 const genres = {
@@ -14,11 +15,10 @@ const apiUrl = 'https://api.themoviedb.org/3/movie/popular';
                 let movie_Genr = '';
                 let movieGenre = movie.genre_ids;
                 movieGenre.forEach(genreId => {
-                    movie_Genr += `${genres[genreId]},`;
+                    movie_Genr += `<span class="badge rounded-pill text-bg-info me-2 my-1">${genres[genreId]}</span>`;
                     console.log(movie_Genr);
                     console.log(movie.title + ': ' +genres[genreId]);
                 });
-                
                 //console.log(movieGenre);
                 const movieId = movie.id;
                 const creditsUrl = `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${apiKey}`;
@@ -69,7 +69,6 @@ const apiUrl = 'https://api.themoviedb.org/3/movie/popular';
                 const moreDetailsText = "More Details"
                 poster.src = `https://image.tmdb.org/t/p/w200${movie.poster_path}`;
                 cover.src = `https://image.tmdb.org/t/p/w500${movie.backdrop_path}`;
-
                 //give classes / content 
                 carddiv.className = "card";
                 overlaydiv.className = "overlay"
@@ -93,7 +92,6 @@ const apiUrl = 'https://api.themoviedb.org/3/movie/popular';
                     tabindex: -1
                 });
                 modalWrapper.setAttribute('aria-hidden', true)
-
                 const modalDialog = document.createElement("div");
                 const modalContent = document.createElement("div");
                 const modalHeader = document.createElement("div");
@@ -138,7 +136,6 @@ const apiUrl = 'https://api.themoviedb.org/3/movie/popular';
                 footerCloseBtn.className = "btn btn-secondary";
                 footerCloseBtn.type = "button";
                 footerCloseBtn.setAttribute('data-bs-dismiss', 'modal')
-
                 // put the app together (injecting to the DOM)
                 movieList.appendChild(wrapperdiv);  
                     wrapperdiv.appendChild(carddiv);
