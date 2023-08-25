@@ -1,0 +1,54 @@
+.card {
+    margin-bottom:20px;
+    min-height:400px;
+    max-height:400px;
+    overflow: hidden;
+}
+.release_date {
+    margin-top:15px;
+    background-color:darkgrey;
+    font-size:65%;
+    text-align: center;
+    padding:5px 10px;
+    color:#333;
+    z-index: 1;
+    display: inline-block;
+    border-radius: 5px;
+}
+.card {
+    display: flex;
+    align-items: flex-start;
+    padding: 20px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+  }
+.card-title {
+    position: relative;
+    z-index: 1;
+}
+.card-text {
+    position: relative;
+    z-index: 1;
+    color: rgb(170,170,170);
+    max-height: 100px;
+    overflow: hidden;
+}
+  .movie-poster {
+    width: 200px;
+    height: auto;
+  }
+.overlay {
+    background:rgba(0,0,0,.6);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    left: 0;
+    top:0;
+}
+.btn {
+    position: relative;
+    z-index: 1;
+}
