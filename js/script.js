@@ -72,7 +72,7 @@ fetch(`${apiUrl}?api_key=${apiKey}`)
                             castProfilePic.src = castMemberProfileUrl;
                             //creating HTML elements for the cast section List View: 
                             const castCardContainer = document.createElement("div");
-                            castCardContainer.className = "card mx-2 mt-2 mb-3 col-md-5 col-sm-10";
+                            castCardContainer.className = "card mx-2 mt-2 mb-3 col-lg-5 col-md-11 col-sm-11";
                             castCardContainer.innerHTML = `
                                 <div class="card-up aqua-gradient"></div>
                                     <div class="avatar mx-auto ">
@@ -103,13 +103,15 @@ fetch(`${apiUrl}?api_key=${apiKey}`)
             const wrapperdiv = document.createElement('div');
             const overlaydiv = document.createElement('div');
             const spacerDiv = document.createElement('div');
-            wrapperdiv.className = "col-md-4";
+            wrapperdiv.className = "col-md-6 col-sm-12 col-lg-4";
             const carddiv = document.createElement('div');
             carddiv.classList.add("movie");
             carddiv.style.backgroundImage = `url(https://image.tmdb.org/t/p/w500${movie.backdrop_path})`;
             const cardbodydiv = document.createElement('div');
             const li = document.createElement('li');
             const title = document.createElement('h6');
+            const overviewTitle = document.createElement("h3");
+            overviewTitle.textContent = `${movie_name} Overview`;
             const overview = document.createElement('p');
             const releaseDate = document.createElement('p');
             const poster = document.createElement('img');
@@ -211,6 +213,7 @@ fetch(`${apiUrl}?api_key=${apiKey}`)
                                             genreContainer.innerHTML += movie_Genr;
                                             modalGridCol4.appendChild(reviewBtn);
                                         modalGridRow.appendChild(modalGridCol8);
+                                            modalGridCol8.appendChild(overviewTitle);
                                             modalGridCol8.appendChild(modalBodyText);
                                             modalGridCol8.appendChild(castContainer);
                                                 castContainer.appendChild(castListTitle);
